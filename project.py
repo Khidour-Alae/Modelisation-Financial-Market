@@ -37,3 +37,14 @@ def f(x):
     return np.maximum(x-110,0)
 
 pricer_2(3,0.02,0.05,-0.05,100,f)
+
+from anytree import Node, RenderTree
+from anytree.exporter import DotExporter
+s0 = Node("100") #root
+s1_1 = Node("95", parent=s0)
+s1_2 = Node("105", parent=s0)
+s2_1 = Node("90.25", parent=s1_1)
+s2_2 = Node("99.75", parent=s1_2)
+s2_2 = Node("99.75", parent=s1_1)
+s2_3 = Node("110.25", parent=s1_2)
+DotExporter(s0).to_picture("Sti.png")
