@@ -1,5 +1,5 @@
 import numpy as np
-from math import comb as comb
+from math import comb as comb #need python 3.8
 #graphviz pour les graphes
 #Using Graphviz and Anytree : https://github.com/xflr6/graphviz
 #voir vers la fin de https://medium.com/swlh/making-data-trees-in-python-3a3ceb050cfd
