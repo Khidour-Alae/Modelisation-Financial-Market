@@ -126,10 +126,13 @@ num0_a = pricer_2_bis(2, 0.03, 0.05, -0.05, 100, f, 1)[0] - pricer_2_bis(2, 0.03
 den0_a = 100 * (0.05 + 0.05)
 alpha0 = num0_a / den0_a
 
+print("alpha0 = ", alpha0)
+
 num0_b = pricer_2_bis(2, 0.03, 0.05, -0.05, 100, f, 1)[1] * (1 + 0.05) - pricer_2_bis(2, 0.03, 0.05, -0.05, 100, f, 1)[0] * (1 - 0.05)
 den0_b = (0.05 + 0.05) * (1 + 0.03)
 beta0 = num0_b / den0_b
 
+print("beta0 = ", beta0)
 
 num1_a_1 = f((1 + 0.05) * getSt_N(1, 0.05, -0.05, 100)[0]) - f((1 - 0.05) * getSt_N(1, 0.05, -0.05, 100)[0])
 den1_a_1 = 100 * (0.05 + 0.05)
@@ -140,7 +143,7 @@ den1_a_2 = 100 * (0.05 + 0.05)
 alpha1_2 = num1_a_2 / den1_a_2
 
 alpha1 =  np.array([alpha1_1, alpha1_2])
-
+print("alpha1 = ", alpha1)
 
 num1_b_1 = f((1 - 0.05) * getSt_N(1, 0.05, -0.05, 100)[0]) * (1 + 0.05) - f((1 + 0.05) * getSt_N(1, 0.05, -0.05, 100)[0]) * (1 - 0.05)
 den1_b_1 = (0.05 + 0.05) * (1 + 0.03)
@@ -152,3 +155,4 @@ den1_b_2 = (0.05 + 0.05) * (1 + 0.03)
 beta1_2 = num1_b_2 / den1_b_2
 
 beta1 = np.array([beta1_1, beta1_2])
+print("beta1 = ", beta1)
