@@ -4,7 +4,6 @@ from math import comb as comb #need python 3.8
 #Using Graphviz and Anytree : https://github.com/xflr6/graphviz
 #voir vers la fin de https://medium.com/swlh/making-data-trees-in-python-3a3ceb050cfd
 
-#fonction testée, elle fonctionne parfaitement,
 #getSt_N(n,hn,bn,s0) renvoie un np.array de toutes les valeurs que peut prendre la variable aléatoire St_N
 def getSt_N(n,hn,bn,s0):
     res = np.ones(n+1)*s0
