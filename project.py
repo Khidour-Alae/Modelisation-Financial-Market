@@ -52,21 +52,14 @@ pricer_1(20,100,0.02,0.05,-0.05,f1)
 ###################################################################
 def pricer_2(N,rn,hn,bn,s,f):
     qn = (rn - bn)/(hn - bn)
-   # print("qn = ",qn)
-
+    
     St_N = getSt_N(N,hn,bn,s)
-    #print("St_N = ",St_N)
     Vk = f(St_N) #VN
-    #print("Vk = ",Vk)
     for n in range(N,0,-1):
         Vkmoins1 = np.zeros(n)
         for k in range(0,n): #on parcourt Vk
             Vkmoins1[k] = (qn * Vk[k] + (1-qn) * Vk[k+1]) / (1 +rn) # Vkmoins1 = (qn * Vk((1+hn)*St_kmoins1) + (1-qn) * Vk((1+bn)*St_kmoins1) ) / (1 + rn)
-
-     #   print("St_kmoins1 = ",getSt_N(n-1,hn,bn,s))
-      #  print("Vkmoins1 = ",Vkmoins1)
         Vk = Vkmoins1
-       # print("Vk = ",Vk)
     return Vkmoins1[0]
 
 
