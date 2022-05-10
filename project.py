@@ -1,6 +1,8 @@
 import numpy as np
+<<<<<<< HEAD
 from matplotlib import pyplot as plt
-# from math import comb as comb #need python 3.8
+#from math import comb as comb #need python 3.8
+from scipy.stats import norm as norm
 
 # #getSt_N(n,hn,bn,s0) renvoie un np.array de toutes les valeurs que peut prendre la variable aleatoire St_N
 # def getSt_N(n,hn,bn,s0):
@@ -172,3 +174,40 @@ for i in range(10):
     res[i] = pricer_MC(int(N[i]), 100, 0.01, 0.1, 1, f)
 plt.plot(N,res)
 plt.show()
+
+###################################################################
+####                       Question 15                         ####
+###################################################################
+
+
+def F(x):
+    return norm.cdf(x)
+
+def put_BS(s,r,sigma,T,K):
+    d1 = (1/(sigma*np.sqrt(T)))*(np.log(s/K)+T*(r+(sigma*sigma)/2))
+    d2 =  d1 - sigma*np.sqrt(T)
+    prix_BS = -s*F(-d1)+K*np.exp(-r*T)*F(-d2)
+    return prix_BS
+
+###################################################################
+####                       Question 16                        ####
+###################################################################
+
+prixFF = put_BS(100,0.01,0.1,1,90)
+print("Le prix du pricer par formule fermé pour r = 0.01, σ = 0.1, s = 100, T = 1, K = 90 est : ", prixFF)
+
+
+###################################################################
+####                       Question 17                         ####
+###################################################################
+
+def f_for_plot(x):
+    return np.maximum(90 - x, 0)
+
+
+n = np.linspace(1e5, 1e6, 32)
+
+#tracé de la courbe
+plt.plot(n, pricer_MC(n, 100, 0.01, 0.1, 1, f_for_plot(n)))
+plt.xlabel('n')
+plt.ylabel
