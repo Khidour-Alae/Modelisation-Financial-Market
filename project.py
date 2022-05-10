@@ -1,5 +1,4 @@
 import numpy as np
-<<<<<<< HEAD
 from matplotlib import pyplot as plt
 #from math import comb as comb #need python 3.8
 from scipy.stats import norm as norm
@@ -154,13 +153,13 @@ def pricer_MC(n, s, r, sigma, T, f):
     cte1 = np.exp(-r*T)
     cte2 = (r - sigma*sigma/2)*T
     cte3 = sigma*np.sqrt(T)
-    for i in range(1,n):
+    for i in range(n):
         res += cte1 * f(s*np.exp(cte2 + cte3*Epsi[i]))
     return res/n
 
 def f(x) :
     return np.maximum(x-100, 0)
-#print(pricer_MC(10, 100, 0.01, 0.1, 1, f))
+print(pricer_MC(10, 100, 0.01, 0.1, 1, f))
 
 ###################################################################
 ####                       Question 13                         ####
@@ -194,7 +193,7 @@ def put_BS(s,r,sigma,T,K):
 ###################################################################
 
 prixFF = put_BS(100,0.01,0.1,1,90)
-print("Le prix du pricer par formule fermé pour r = 0.01, σ = 0.1, s = 100, T = 1, K = 90 est : ", prixFF)
+print("Le prix du pricer par formule ferme pour r = 0.01, sigma = 0.1, s = 100, T = 1, K = 90 est : ", prixFF)
 
 
 ###################################################################
@@ -207,10 +206,10 @@ def f_for_plot(x):
 
 n = np.linspace(1e5, 1e6, 32)
 
-#tracé de la courbe
+#trace de la courbe
 plt.plot(n, pricer_MC(n, 100, 0.01, 0.1, 1, f_for_plot(n)))
 plt.plot(n, prixFF)
 plt.xlabel('n')
-plt.ylabel('Prix donné par la fonction Pricer_MC')
+plt.ylabel('Prix donne par la fonction Pricer_MC')
 plt.show()
 
