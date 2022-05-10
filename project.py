@@ -4,11 +4,7 @@ from scipy.stats import norm as norm
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import axes3d  # Fonction pour la 3D
 
-#graphviz pour les graphes
-#Using Graphviz and Anytree : https://github.com/xflr6/graphviz
-#voir vers la fin de https://medium.com/swlh/making-data-trees-in-python-3a3ceb050cfd
-
-#getSt_N(n,hn,bn,s0) renvoie un np.array de toutes les valeurs que peut prendre la variable aléatoire St_N
+#getSt_N(n,hn,bn,s0) renvoie un np.array de toutes les valeurs que peut prendre la variable aleatoire St_N
 def getSt_N(n,hn,bn,s0):
     res = np.ones(n+1)*s0
     for i in range(n+1):
@@ -98,7 +94,7 @@ compare(pricer_1, pricer_2, np.random.randint(5,16), 0.01, 0.05, -0.05, 100, f)
 ###################################################################
 
 
-def pricer_2_bis(N, rn, hn, bn, s, f, e): #cette fonction a un paramètre en plus par rapport à pricer_2, le paramètre en plus est e qui correspond à l'étape à laquelle nous voulons nous arréter
+def pricer_2_bis(N, rn, hn, bn, s, f, e): #cette fonction a un parametre en plus par rapport a pricer_2, le parametre en plus est e qui correspond a l'etape a laquelle nous voulons nous arreter
     qn = (rn - bn)/(hn - bn)
 
     St_N = getSt_N(N,hn,bn,s)
@@ -200,7 +196,7 @@ def put_BS(s,r,sigma,T,K):
 ###################################################################
 
 prixFF = put_BS(100,0.01,0.1,1,90)
-print("Le prix du pricer par formule fermé pour r = 0.01, sigma = 0.1, s = 100, T = 1, K = 90 est : ", prixFF)
+print("Le prix du pricer par formule ferme pour r = 0.01, sigma = 0.1, s = 100, T = 1, K = 90 est : ", prixFF)
 
 
 ###################################################################
@@ -216,11 +212,11 @@ price = np.zeros(10)
 for i in range(10):
     price[i] = pricer_MC(int(n[i]), 100, 0.01, 0.1, 1, f_for_plot)
 
-#tracé de la courbe
+#trace de la courbe
 plt.plot(n, price)
 plt.axhline(prixFF)
 plt.xlabel('n')
-plt.ylabel('Prix donné par la fonction Pricer_MC')
+plt.ylabel('Prix donne par la fonction Pricer_MC')
 plt.show()
 
 
@@ -243,10 +239,10 @@ for i in range(len_T):
 for i in range(len_k*len_T):
     z[i] = put_BS(int(20*x[i]),0.01,0.1,y[i],100)
 
-# Tracé du résultat en 3D
+# Trace du resultat en 3D
 fig = plt.figure()
 #ax = fig.gca(projection='3d')  # Affichage en 3D
-#ax.scatter(x, y, z, label='Courbe', marker='d')  # Tracé des points 3D
+#ax.scatter(x, y, z, label='Courbe', marker='d')  # Trace des points 3D
 
 X,Y = np.meshgrid(x,y)
 Z = put_BS(int(20*X),0.01,0.1,Y,100)
