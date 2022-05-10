@@ -230,120 +230,63 @@ plt.show()
 ####                       Question 18                         ####
 ###################################################################
 
-# # Tracé 0 du résultat en 3D
-# tab_k = np.arange(1,11)
-# tab_s = 20*tab_k
-# tab_T = np.linspace(1/12,1,10)
-# mat_z = np.eye(10)
-# row_z = []
-# for i in range(10):
-#     row_z += [put_BS(int(tab_s[i]),0.01,0.1,tab_T[i],100)] #Pour tracer les droites parallèle du graphique
-#     for j in range(10):
-#         mat_z[i][j] = put_BS(int(tab_s[i]),0.01,0.1,tab_T[j],100)
-#
-#
-# axes = ply.axes(projection="3d")
-# axes.contour3D(tab_k,tab_T,mat_z)
-# axes.plot3D(tab_k,tab_T,row_z,color="orange")
-# axes.view_init(30,10)
-# plt.xlabel("k")
-# plt.ylabel("T")
-# plt.zlabel("Prix")
-# plt.show()
+# Tracé 0 du résultat en 3D
+tab_k = np.arange(1,11)
+tab_s = 20*tab_k
+tab_T = np.linspace(1/12,1,10)
+mat_z = np.eye(10)
+row_z = []
+for i in range(10):
+    row_z += [put_BS(int(tab_s[i]),0.01,0.1,tab_T[i],100)] #Pour tracer les droites parallèle du graphique
+    for j in range(10):
+        mat_z[i][j] = put_BS(int(tab_s[i]),0.01,0.1,tab_T[j],100)
 
 
-
-
-# # Tracé 0V2 du résultat en 3D
-# tab_k = np.arange(1,11)
-# tab_s = 20*tab_k
-# tab_T = np.array([1,1/2,1/3,1/4,1/6,1/12])
-# mat_z = np.outer(np.ones(10),np.ones(6))
-# row_z = []
-# for k in range(10):
-#     for i in range(6):
-#         row_z += [put_BS(int(tab_s[k]),0.01,0.1,tab_T[i],100)] #Pour tracer les droites parallèle du graphique
-#         mat_z[k][i] = put_BS(int(tab_s[k]),0.01,0.1,tab_T[i],100)
-#
-#
-#
-# axes = ply.axes(projection="3d")
-# axes.contour3D(tab_k,tab_T,mat_z)
-# axes.plot3D(tab_k,tab_T,row_z,color="orange")
-# axes.view_init(30,10)
-# plt.xlabel("k")
-# plt.ylabel("T")
-# plt.zlabel("Prix")
-# plt.show()
-
-
-
-# Tracé 1 du résultat en 3D
-# tab_k = np.arange(1,11)
-# tab_s = 20*tab_k
-# tab_T = np.linspace(1/12,1,10)
-#
-# x = np.outer(tab_k,tab_T)
-# y = x.copy().T
-# z = put_BS(20*x,0.01,0.1,y,100)
-#
-# fig = plt.figure()
-# ax = plt.axes(projection ='3d')
-# ax.plot_surface(x, y, z, cmap ='viridis', edgecolor ='green') 
-# ax.set_title('Surface plot geeks for geeks') 
-# plt.show() 
-
+axes = plt.axes(projection="3d")
+axes.contour3D(tab_k,tab_T,mat_z)
+axes.plot3D(tab_k,tab_T,row_z,color="orange")
+axes.view_init(30,10)
+plt.xlabel("k")
+plt.ylabel("T")
+#plt.zlabel("Prix")
+plt.show()
 
 
 # Tracé 2 du résultat en 3D
 #
-# tab_k = np.arange(1,11)
-# tab_T = np.array([1,1/2,1/3,1/4,1/6,1/12])
-# len_k = tab_k.size
-# len_T = tab_T.size
-#
-# x = np.zeros(len_k*len_T)
-# y = np.zeros(len_k*len_T)
-# z = np.zeros(len_k*len_T)
-# for i in range(len_T):
-#     x[6*i:6*(i+1)] = tab_k[i]*np.ones(6)
-#     y[6*i:6*(i+1)] = np.copy(tab_T)
-# for i in range(len_k*len_T):
-#     z[i] = put_BS(int(20*x[i]),0.01,0.1,y[i],100)
-#
-#
-# fig = plt.figure()
-# ax = fig.gca(projection='3d')  # Affichage en 3D
-# ax.scatter(x, y, z, label='Courbe', marker='d')  # Tracé des points 3D
-#
-#
-# plt.title("Points 3D")
-# ax.set_xlabel('X')
-# ax.set_ylabel('Y')
-# ax.set_zlabel('Z')
-# plt.tight_layout()
+tab_k = np.arange(1,11)
+tab_T = np.array([1,1/2,1/3,1/4,1/6,1/12])
+len_k = tab_k.size
+len_T = tab_T.size
+
+x = np.zeros(len_k*len_T)
+y = np.zeros(len_k*len_T)
+z = np.zeros(len_k*len_T)
+for i in range(len_T):
+    x[6*i:6*(i+1)] = tab_k[i]*np.ones(6)
+    y[6*i:6*(i+1)] = np.copy(tab_T)
+for i in range(len_k*len_T):
+    z[i] = put_BS(int(20*x[i]),0.01,0.1,y[i],100)
+
+
+fig = plt.figure()
+ax = fig.gca(projection='3d')  # Affichage en 3D
+ax.scatter(x, y, z, label='Courbe', marker='d')  # Tracé des points 3D
+
+
+plt.title("Points 3D 2")
+ax.set_xlabel('X')
+ax.set_ylabel('Y')
+ax.set_zlabel('Z')
+plt.tight_layout()
+plt.show()
 
 
 
 
 
 
-# Tracé 3 du résultat en 3D
-#fig = plt.figure()
-#
-# X,Y = np.meshgrid(x,y)
-# Z = put_BS(int(20*X),0.01,0.1,Y,100)
-# ax = plt.axes(projection ='3d') 
-# ax.contour3D(X, Y, Z) 
-#
-#
-# plt.title("Points 3D")
-# ax.set_xlabel('X')
-# ax.set_ylabel('Y')
-# ax.set_zlabel('Z')
-# plt.tight_layout()
-# plt.show()    
-    
+
 
 
 
@@ -360,9 +303,11 @@ r = 0.03
 s = 100
 for i in range(100):
     rn = r/n2[i]
-    hn = (1 + rn) * np.exp(sigma * np.sqrt(T/n2[i]))
-    bn = (1 + rn) * np.exp(- sigma * np.sqrt(T/n2[i])) - 1
-    price_2[i] = pricer_2(n2[i], rn, hn, bn, s, f)
+    hn = (1 + rn) * np.exp(sigma * np.sqrt(T/n2[i])) - 1
+    bn = (1 + rn) * np.exp(-sigma * np.sqrt(T/n2[i])) - 1
+    price_2[i] = pricer_2(int(n2[i]), rn, hn, bn, s, f)
 plt.plot(n2, price_2)
+plt.xlabel("n")
+plt.ylabel("pricer 2")
 plt.show()
 
