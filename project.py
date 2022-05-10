@@ -152,15 +152,32 @@ print("beta1 = ", beta1)
 ###################################################################
 
 def pricer_MC(n, s, r, sigma, T, f):
-    Epsi = np.normal(loc=0, scale=1, size=n)
-    s = 0
-    for i in range(1,n+1):
-        s = s + np.exp(-r*T) * f(s * np.exp((r - sigma*sigma/2)*T + sigma*np.sqrt(T)*Epsi[i]))
-    return s/n
+    Epsi = np.random.normal(loc=0, scale=1, size=n)
+    sum = 0
+    cte1 = np.exp(-r*T)
+    cte2 = (r - sigma*sigma/2)*T
+    cte3 = sigma*np.sqrt(T)
+    for i in range(1,n):
+        sum += cte1 * f(s*np.exp(cte2 + cte3*Epsi[i]))
+    return sum/n
+
+def f(x) :
+    return np.maximum(x-100, 0)
+#print(pricer_MC(10, 100, 0.01, 0.1, 1, f))
 
 ###################################################################
 ####                       Question 13                         ####
 ###################################################################
+
+N = np.arange(1,11)*1e05
+res = np.zeros(10)
+def f(x) :
+    return np.maximum(x-100, 0)
+for i in range(10):
+    res[i] = pricer_MC(int(N[i]), 100, 0.01, 0.1, 1, f)
+plt.plot(N,res)
+plt.show()
+
 
 
 
@@ -255,7 +272,7 @@ for i in range(100):
     rn = r/n2[i]
     hn = (1 + rn) * np.exp(sigma * np.sqrt(T/n2[i]))
     bn = (1 + rn) * np.exp(- sigma * np.sqrt(T/n2[i])) - 1
-    price_2[i] = pricer_2(int(n2[i]), rn, hn, bn, s, f)
+    price_2[i] = pricer_2(n2[i], rn, hn, bn, s, f)
 plt.plot(n2, price_2)
 plt.show()
 
