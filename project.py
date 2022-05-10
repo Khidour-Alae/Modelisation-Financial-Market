@@ -1,4 +1,5 @@
 import numpy as np
+import matplotlib.pyplot as plt
 from math import comb as comb #need python 3.8
 #graphviz pour les graphes
 #Using Graphviz and Anytree : https://github.com/xflr6/graphviz
@@ -39,6 +40,7 @@ def pricer_1(N, s, rn, hn, bn, f):
 def f1(x):
     return np.maximum(x-110,0)
 
+
 pricer_1(20,100,0.02,0.05,-0.05,f1)
 
 ###################################################################
@@ -61,8 +63,8 @@ def pricer_2(N,rn,hn,bn,s,f):
 ####                       Question 6                          ####
 ###################################################################
 
-def f(x) :
-    return np.maximum(x-100,0)
+def f(x):
+    return np.maximum(x-100, 0)
 
 pricer_2(3,0.02,0.05,-0.05,100,f)
 
@@ -149,7 +151,7 @@ print("beta1 = ", beta1)
 ###################################################################
 
 def pricer_MC(n, s, r, sigma, T, f):
-    Epsi = np.normal(loc=0, scale=1, size=n)
+    Epsi = np.random.normal(loc=0, scale=1, size=n)
     s = 0
     for i in range(1,n+1):
         s = s + np.exp(-r*T) * f(s * np.exp((r - sigma*sigma/2)*T + sigma*np.sqrt(T)*Epsi[i]))
@@ -158,3 +160,20 @@ def pricer_MC(n, s, r, sigma, T, f):
 ###################################################################
 ####                       Question 13                         ####
 ###################################################################
+
+
+
+
+
+###################################################################
+####                       Question 17                         ####
+###################################################################
+
+def f_for_plot(x):
+    return np.maximum(90 - x, 0)
+
+
+n = np.linspace(1e5, 1e6, 100)
+
+#tracé de la courbe
+plt.plot(n, pricer_MC(n, 100, 0.01, 0.1, 1, f_for_plot(n)))
