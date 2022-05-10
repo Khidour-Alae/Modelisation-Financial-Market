@@ -1,5 +1,7 @@
 import numpy as np
 from math import comb as comb #need python 3.8
+from scipy.stats import norm as norm
+
 #graphviz pour les graphes
 #Using Graphviz and Anytree : https://github.com/xflr6/graphviz
 #voir vers la fin de https://medium.com/swlh/making-data-trees-in-python-3a3ceb050cfd
@@ -158,3 +160,26 @@ def pricer_MC(n, s, r, sigma, T, f):
 ###################################################################
 ####                       Question 13                         ####
 ###################################################################
+
+
+
+###################################################################
+####                       Question 15                         ####
+###################################################################
+
+
+def F(x):
+    return norm.cdf(x)
+
+def put_BS(s,r,sigma,T,K):
+    d1 = (1/(sigma*sqrt(T)))*(np.log(s/K)+T*(r+(sigma*sigma)/2))
+    d2 =  d1 - sigma*sqrt(T)
+    prix_BS = -s*F(-d1)+K*numpy.exp(-r*T)*F(-d2)
+    return prix_BS
+
+###################################################################
+####                       Question 16                        ####
+###################################################################
+
+prixFF = put_BS(100,0.01,0.1,1,90)
+print("Le prix du pricer par formule fermé pour r = 0.01, σ = 0.1, s = 100, T = 1, K = 90 est : ", prixFF)
