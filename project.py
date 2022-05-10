@@ -282,8 +282,13 @@ plt.show()
 
 # Tracé 3 du résultat en 3D
 
+#X,Y = np.meshgrid(x,y)
+#Z = put_BS(20*x,0.01,0.1,y,100)
+
+x=np.linspace(-3,3,100)
+y=np.linspace(-3,3,100)
 X,Y = np.meshgrid(x,y)
-Z = put_BS(20*x,0.01,0.1,y,100)
+Z = 1/(1+np.exp(-X-Y))
 
 fig = plt.figure()
 axes = plt.axes(projection="3d")
