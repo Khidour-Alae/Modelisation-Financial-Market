@@ -266,6 +266,9 @@ plt.show()
 ###################################################################
 ####                       Question 19                         ####
 ###################################################################
+def f_i(x):
+    return np.maximum(100 - x, 0)
+
 
 n2 = np.linspace(10, 1000, 100)
 price_2 = np.zeros(100)
@@ -275,11 +278,8 @@ r = 0.03
 s = 100
 for i in range(100):
     rn = r/n2[i]
-    hn = (1 + rn) * np.exp(sigma * np.sqrt(T/n2[i]))
+    hn = (1 + rn) * np.exp(sigma * np.sqrt(T/n2[i])) - 1
     bn = (1 + rn) * np.exp(- sigma * np.sqrt(T/n2[i])) - 1
-
-    def f_i(x):
-        return np.maximum(100 - getSt_N(int(x), hn, bn, s), 0)
 
     price_2[i] = pricer_2(int(n2[i]), rn, hn, bn, s, f_i)
 
