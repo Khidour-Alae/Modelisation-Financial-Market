@@ -307,6 +307,7 @@ for i in range(100):
     bn = (1 + rn) * np.exp(-sigma * np.sqrt(T/n2[i])) - 1
     price_2[i] = pricer_2(int(n2[i]), rn, hn, bn, s, f)
 plt.plot(n2, price_2)
+plt.axhline(9.415)
 plt.xlabel("n")
 plt.ylabel("pricer 2")
 plt.show()
