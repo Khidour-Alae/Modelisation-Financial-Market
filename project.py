@@ -1,5 +1,4 @@
 import numpy as np
-<<<<<<< HEAD
 from matplotlib import pyplot as plt
 #from math import comb as comb #need python 3.8
 from scipy.stats import norm as norm
@@ -205,11 +204,14 @@ def f_for_plot(x):
     return np.maximum(90 - x, 0)
 
 
-n = np.linspace(1e5, 1e6, 32)
+n = np.linspace(1e5, 1e6, 10)
+price = np.zeros(10)
+for i in range(10):
+    price[i] = pricer_MC(int(n[i]), 100, 0.01, 0.1, 1, f_for_plot)
 
 #tracé de la courbe
-plt.plot(n, pricer_MC(n, 100, 0.01, 0.1, 1, f_for_plot(n)))
-plt.plot(n, prixFF)
+plt.plot(n, price)
+plt.axhline(prixFF)
 plt.xlabel('n')
 plt.ylabel('Prix donné par la fonction Pricer_MC')
 plt.show()
