@@ -240,8 +240,8 @@ plt.show()
 #     row_z += [put_BS(int(tab_s[i]),0.01,0.1,tab_T[i],100)] #Pour tracer les droites parallèle du graphique
 #     for j in range(10):
 #         mat_z[i][j] = put_BS(int(tab_s[i]),0.01,0.1,tab_T[j],100)
-
-
+#
+#
 # axes = ply.axes(projection="3d")
 # axes.contour3D(tab_k,tab_T,mat_z)
 # axes.plot3D(tab_k,tab_T,row_z,color="orange")
