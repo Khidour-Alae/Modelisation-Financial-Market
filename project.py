@@ -248,7 +248,6 @@ axes.plot3D(tab_k,tab_T,row_z,color="orange")
 axes.view_init(30,10)
 plt.xlabel("k")
 plt.ylabel("T")
-#plt.zlabel("Prix")
 plt.show()
 
 
@@ -281,9 +280,19 @@ ax.set_zlabel('Z')
 plt.tight_layout()
 plt.show()
 
+# Tracé 3 du résultat en 3D
 
+X,Y = np.meshgrid(x,y)
+Z = put_BS(20*x,0.01,0.1,y,100)
 
-
+fig = plt.figure()
+axes = plt.axes(projection="3d")
+axes.plot_surface(X,Y,Z,cmap="plasma")
+axes.set_title("Graphique du prix avec put_BS")
+ax.set_xlabel('k')
+ax.set_ylabel('T')
+ax.set_zlabel('Prix')
+plt.show()
 
 
 
