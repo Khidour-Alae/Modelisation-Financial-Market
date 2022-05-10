@@ -209,5 +209,8 @@ n = np.linspace(1e5, 1e6, 32)
 
 #tracé de la courbe
 plt.plot(n, pricer_MC(n, 100, 0.01, 0.1, 1, f_for_plot(n)))
+plt.plot(n, prixFF)
 plt.xlabel('n')
-plt.ylabel
+plt.ylabel('Prix donné par la fonction Pricer_MC')
+plt.show()
+
