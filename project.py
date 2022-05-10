@@ -150,13 +150,13 @@ from scipy.stats import norm as norm
 
 def pricer_MC(n, s, r, sigma, T, f):
     Epsi = np.random.normal(loc=0, scale=1, size=n)
-    sum = 0
+    res = 0
     cte1 = np.exp(-r*T)
     cte2 = (r - sigma*sigma/2)*T
     cte3 = sigma*np.sqrt(T)
     for i in range(1,n):
-        sum += cte1 * f(s*np.exp(cte2 + cte3*Epsi[i]))
-    return sum/n
+        res += cte1 * f(s*np.exp(cte2 + cte3*Epsi[i]))
+    return res/n
 
 def f(x) :
     return np.maximum(x-100, 0)
