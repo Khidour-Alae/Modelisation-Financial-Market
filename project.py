@@ -3,6 +3,8 @@ from math import comb as comb #need python 3.8
 from scipy.stats import norm as norm
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import axes3d  # Fonction pour la 3D
+from mpl_toolkits import mplot3d
+
 
 #graphviz pour les graphes
 #Using Graphviz and Anytree : https://github.com/xflr6/graphviz
@@ -249,7 +251,7 @@ fig = plt.figure()
 #ax.scatter(x, y, z, label='Courbe', marker='d')  # Tracé des points 3D
 
 X,Y = np.meshgrid(x,y)
-Z = put_BS(int(20*X),0.01,0.1,Y,100)
+Z = put_BS(20*X,0.01,0.1,Y,100)
 ax = plt.axes(projection ='3d') 
   
 ax.contour3D(X, Y, Z) 
@@ -279,12 +281,12 @@ for i in range(100):
     rn = r/n2[i]
     hn = (1 + rn) * np.exp(sigma * np.sqrt(T/n2[i]))
     bn = (1 + rn) * np.exp(- sigma * np.sqrt(T/n2[i])) - 1
-    St_N = getSt_N(int(n2[i]), hn, bn, s)
 
-    def f_i (x):
-        return np.maximum(100 - St_N, 0)
+    def f_i(x):
+        return np.maximum(100 - getSt_N(int(x), hn, bn, s), 0)
 
     price_2[i] = pricer_2(int(n2[i]), rn, hn, bn, s, f_i)
+
 plt.plot(n2, price_2)
 plt.show()
 
