@@ -272,7 +272,12 @@ for i in range(100):
     rn = r/n2[i]
     hn = (1 + rn) * np.exp(sigma * np.sqrt(T/n2[i]))
     bn = (1 + rn) * np.exp(- sigma * np.sqrt(T/n2[i])) - 1
-    price_2[i] = pricer_2(n2[i], rn, hn, bn, s, f)
+    St_N = getSt_N(int(n2[i]), hn, bn, s)
+
+    def f_i (x):
+        return np.maximum(100 - St_N, 0)
+
+    price_2[i] = pricer_2(int(n2[i]), rn, hn, bn, s, f_i)
 plt.plot(n2, price_2)
 plt.show()
 
