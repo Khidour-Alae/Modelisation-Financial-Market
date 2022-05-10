@@ -245,8 +245,15 @@ for i in range(len_k*len_T):
 
 # Tracé du résultat en 3D
 fig = plt.figure()
-ax = fig.gca(projection='3d')  # Affichage en 3D
-ax.scatter(x, y, z, label='Courbe', marker='d')  # Tracé des points 3D
+#ax = fig.gca(projection='3d')  # Affichage en 3D
+#ax.scatter(x, y, z, label='Courbe', marker='d')  # Tracé des points 3D
+
+X,Y = np.meshgrid(x,y)
+Z = put_BS(int(20*X),0.01,0.1,Y,100)
+ax = plt.axes(projection ='3d') 
+  
+ax.contour3D(X, Y, Z) 
+
 plt.title("Points 3D")
 ax.set_xlabel('X')
 ax.set_ylabel('Y')
