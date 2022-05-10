@@ -174,9 +174,9 @@ def F(x):
 
 def put_BS(s,r,sigma,T,K):
     d1 = (1/(sigma*np.sqrt(T)))*(np.log(s/K)+T*(r+(sigma*sigma)/2))
-    d2 =  d1 - sigma*np.sqrt(T)
-    prix_BS = -s*F(-d1)+K*np.exp(-r*T)*F(-d2)
-    return prix_BS
+    d2 = d1 - sigma*np.sqrt(T)
+    prix_bs = -s*F(-d1)+K*np.exp(-r*T)*F(-d2)
+    return prix_bs
 
 ###################################################################
 ####                       Question 16                        ####
@@ -187,22 +187,44 @@ print("Le prix du pricer par formule fermé pour r = 0.01, sigma = 0.1, s = 100,
 
 
 ###################################################################
+####                       Question 17                         ####
+###################################################################
+
+def f_for_plot(x):
+    return np.maximum(90 - x, 0)
+
+
+n = np.linspace(1e5, 1e6, 10)
+price = np.zeros(10)
+for i in range(10):
+    price[i] = pricer_MC(int(n[i]), 100, 0.01, 0.1, 1, f_for_plot)
+
+#tracé de la courbe
+plt.plot(n, price)
+plt.axhline(prixFF)
+plt.xlabel('n')
+plt.ylabel('Prix donné par la fonction Pricer_MC')
+plt.show()
+
+
+
+###################################################################
 ####                       Question 18                         ####
 ###################################################################
 
 tab_k = np.arange(1,11)
 tab_T = np.array([1,1/2,1/3,1/4,1/6,1/12])
-len_s = tab_s.size
+len_k = tab_k.size
 len_T = tab_T.size
 
-x = np.zeros(len_s*len_T)
-y = np.zeros(len_s*len_T)
-z = np.zeros(len_s*len_T)
+x = np.zeros(len_k*len_T)
+y = np.zeros(len_k*len_T)
+z = np.zeros(len_k*len_T)
 for i in range(len_T):
     x[6*i:6*(i+1)] = tab_k[i]*np.ones(6)
     y[6*i:6*(i+1)] = np.copy(tab_T)
-for i in range(len_s*len_T):
-    z[i] = put_FF(20*x[i],0.01,0.1,y[i],100)
+for i in range(len_k*len_T):
+    z[i] = put_BS(int(20*x[i]),0.01,0.1,y[i],100)
 
 # Tracé du résultat en 3D
 fig = plt.figure()
@@ -224,14 +246,16 @@ plt.show()
 ###################################################################
 
 n2 = np.linspace(10, 1000, 100)
-price_2 = np.zeros(10)
+price_2 = np.zeros(100)
 sigma = 0.2
 T = 1
+r = 0.03
 s = 100
-for i in range(100) :
+for i in range(100):
     rn = r/n2[i]
     hn = (1 + rn) * np.exp(sigma * np.sqrt(T/n2[i]))
     bn = (1 + rn) * np.exp(- sigma * np.sqrt(T/n2[i])) - 1
-    price_2[i] = pricer_2(n2[i], rn, hn, bn, s, f)
-plt.plot(n, )
+    price_2[i] = pricer_2(int(n2[i]), rn, hn, bn, s, f)
+plt.plot(n2, price_2)
+plt.show()
 
