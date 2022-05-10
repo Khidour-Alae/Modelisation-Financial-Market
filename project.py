@@ -43,17 +43,17 @@ from scipy.stats import norm as norm
 # ###################################################################
 # ####                       Question 5                          ####
 # ###################################################################
-# def pricer_2(N,rn,hn,bn,s,f):
-#     qn = (rn - bn)/(hn - bn)
+ def pricer_2(N,rn,hn,bn,s,f):
+     qn = (rn - bn)/(hn - bn)
 
-#     St_N = getSt_N(N,hn,bn,s)
-#     Vk = f(St_N) #VN
-#     for n in range(N,0,-1):
-#         Vkmoins1 = np.zeros(n)
-#         for k in range(0,n): #on parcourt Vk
-#             Vkmoins1[k] = (qn * Vk[k] + (1-qn) * Vk[k+1]) / (1 +rn) # Vkmoins1 = (qn * Vk((1+hn)*St_kmoins1) + (1-qn) * Vk((1+bn)*St_kmoins1) ) / (1 + rn)
-#         Vk = Vkmoins1
-#     return Vk[0]
+     St_N = getSt_N(N,hn,bn,s)
+     Vk = f(St_N) #VN
+     for n in range(N,0,-1):
+         Vkmoins1 = np.zeros(n)
+         for k in range(0,n): #on parcourt Vk
+             Vkmoins1[k] = (qn * Vk[k] + (1-qn) * Vk[k+1]) / (1 +rn) # Vkmoins1 = (qn * Vk((1+hn)*St_kmoins1) + (1-qn) * Vk((1+bn)*St_kmoins1) ) / (1 + rn)
+         Vk = Vkmoins1
+     return Vk[0]
 
 
 # ###################################################################
@@ -216,4 +216,22 @@ plt.axhline(prixFF)
 plt.xlabel('n')
 plt.ylabel('Prix donne par la fonction Pricer_MC')
 plt.show()
+
+
+
+###################################################################
+####                       Question 19                         ####
+###################################################################
+
+n2 = np.linspace(10, 1000, 100)
+price_2 = np.zeros(10)
+sigma = 0.2
+T = 1
+s = 100
+for i in range(100) :
+    rn = r/n2[i]
+    hn = (1 + rn) * np.exp(sigma * np.sqrt(T/n2[i]))
+    bn = (1 + rn) * np.exp(- sigma * np.sqrt(T/n2[i])) - 1
+    price_2[i] = pricer_2(n2[i], rn, hn, bn, s, f)
+plt.plot(n, )
 
