@@ -222,6 +222,7 @@ plt.plot(n, price)
 plt.axhline(prixFF)
 plt.xlabel('n')
 plt.ylabel('Prix donné par la fonction Pricer_MC')
+plt.title("Prix donné ")
 plt.show()
 
 
