@@ -3,6 +3,7 @@ from math import comb as comb #need python 3.8
 from scipy.stats import norm as norm
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import axes3d  # Fonction pour la 3D
+from mpl_toolkits import mplot3d 
 
 #graphviz pour les graphes
 #Using Graphviz and Anytree : https://github.com/xflr6/graphviz
@@ -230,35 +231,52 @@ plt.show()
 ###################################################################
 
 tab_k = np.arange(1,11)
-tab_T = np.array([1,1/2,1/3,1/4,1/6,1/12])
-len_k = tab_k.size
-len_T = tab_T.size
+tab_s = 20*tab_k
+#tab_T = np.array([1,1/2,1/3,1/4,1/6,1/12])
+tab_T = np.linspace(1/12,1,10)
 
-x = np.zeros(len_k*len_T)
-y = np.zeros(len_k*len_T)
-z = np.zeros(len_k*len_T)
-for i in range(len_T):
-    x[6*i:6*(i+1)] = tab_k[i]*np.ones(6)
-    y[6*i:6*(i+1)] = np.copy(tab_T)
-for i in range(len_k*len_T):
-    z[i] = put_BS(int(20*x[i]),0.01,0.1,y[i],100)
+x = np.outer(tab_k,tab_T)
+y = x.copy().T
+z = put_BS(20*x,0.01,0.1,y,100)
+
+fig = plt.figure()
+ax = plt.axes(projection ='3d')
+ax.plot_surface(x, y, z, cmap ='viridis', edgecolor ='green') 
+ax.set_title('Surface plot geeks for geeks') 
+
+
+# len_k = tab_k.size
+# len_T = tab_T.size
+
+# x = np.zeros(len_k*len_T)
+# y = np.zeros(len_k*len_T)
+# z = np.zeros(len_k*len_T)
+# for i in range(len_T):
+#     x[6*i:6*(i+1)] = tab_k[i]*np.ones(6)
+#     y[6*i:6*(i+1)] = np.copy(tab_T)
+# for i in range(len_k*len_T):
+#     z[i] = put_BS(int(20*x[i]),0.01,0.1,y[i],100)
+
+
+
+
 
 # Tracé du résultat en 3D
-fig = plt.figure()
+#fig = plt.figure()
 #ax = fig.gca(projection='3d')  # Affichage en 3D
 #ax.scatter(x, y, z, label='Courbe', marker='d')  # Tracé des points 3D
 
-X,Y = np.meshgrid(x,y)
-Z = put_BS(int(20*X),0.01,0.1,Y,100)
-ax = plt.axes(projection ='3d') 
-  
-ax.contour3D(X, Y, Z) 
+# X,Y = np.meshgrid(x,y)
+# Z = put_BS(int(20*X),0.01,0.1,Y,100)
+# ax = plt.axes(projection ='3d') 
+# ax.contour3D(X, Y, Z) 
 
-plt.title("Points 3D")
-ax.set_xlabel('X')
-ax.set_ylabel('Y')
-ax.set_zlabel('Z')
-plt.tight_layout()
+
+# plt.title("Points 3D")
+# ax.set_xlabel('X')
+# ax.set_ylabel('Y')
+# ax.set_zlabel('Z')
+# plt.tight_layout()
 plt.show()    
     
 
