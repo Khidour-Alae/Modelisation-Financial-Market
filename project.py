@@ -184,7 +184,7 @@ def put_BS(s,r,sigma,T,K):
 ###################################################################
 
 prixFF = put_BS(100,0.01,0.1,1,90)
-print("Le prix du pricer par formule fermé pour r = 0.01, σ = 0.1, s = 100, T = 1, K = 90 est : ", prixFF)
+print("Le prix du pricer par formule fermé pour r = 0.01, sigma = 0.1, s = 100, T = 1, K = 90 est : ", prixFF)
 
 
 ###################################################################
