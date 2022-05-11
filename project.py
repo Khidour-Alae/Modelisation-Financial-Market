@@ -1,3 +1,5 @@
+# Le code fonctionne sur Python3.8 ou supérieur
+
 import numpy as np
 from math import comb as comb #need python 3.8
 from scipy.stats import norm as norm
@@ -5,15 +7,7 @@ import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import axes3d  # Fonction pour la 3D
 from mpl_toolkits import mplot3d
 from matplotlib import cm
-from random import randint
-from math import factorial
-import scipy as scipy
-import scipy.linalg
-import scipy.stats as stats
 
-#graphviz pour les graphes
-#Using Graphviz and Anytree : https://github.com/xflr6/graphviz
-#voir vers la fin de https://medium.com/swlh/making-data-trees-in-python-3a3ceb050cfd
 
 #getSt_N(n,hn,bn,s0) renvoie un np.array de toutes les valeurs que peut prendre la variable aléatoire St_N
 def getSt_N(n,hn,bn,s0):
@@ -75,17 +69,6 @@ def f(x) :
     return np.maximum(x-100,0)
 
 pricer_2(3,0.02,0.05,-0.05,100,f)
-
-#from anytree import Node, RenderTree
-#from anytree.exporter import DotExporter
-#s0 = Node("100") #root
-#s1_1 = Node("95", parent=s0)
-#s1_2 = Node("105", parent=s0)
-#s2_1 = Node("90.25", parent=s1_1)
-#s2_2 = Node("99.75", parent=s1_2)
-#s2_2 = Node("99.75", parent=s1_1)
-#s2_3 = Node("110.25", parent=s1_2)
-#DotExporter(s0).to_picture("Sti.png")
 
 
 
@@ -184,7 +167,6 @@ for i in range(10):
     res[i] = pricer_MC(int(N[i]), 100, 0.01, 0.1, 1, f)
 plt.plot(N,res)
 plt.show()
-
 
 
 
@@ -299,11 +281,6 @@ ax.set_xlabel('k')
 ax.set_ylabel('T')
 ax.set_zlabel('Prix')
 plt.show()
-
-
-
-
-
 
 
 ###################################################################
