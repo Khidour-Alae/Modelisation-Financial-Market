@@ -3,7 +3,13 @@ from math import comb as comb #need python 3.8
 from scipy.stats import norm as norm
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import axes3d  # Fonction pour la 3D
-from mpl_toolkits import mplot3d 
+from mpl_toolkits import mplot3d
+from matplotlib import cm
+from random import randint
+from math import factorial
+import scipy as scipy
+import scipy.linalg
+import scipy.stats as stats
 
 #graphviz pour les graphes
 #Using Graphviz and Anytree : https://github.com/xflr6/graphviz
@@ -222,7 +228,7 @@ plt.plot(n, price)
 plt.axhline(prixFF)
 plt.xlabel('n')
 plt.ylabel('Prix donné par la fonction Pricer_MC')
-plt.title("Prix donné ")
+plt.title("Prix donné par pricer_MC")
 plt.show()
 
 
@@ -282,18 +288,12 @@ plt.tight_layout()
 plt.show()
 
 # Tracé 3 du résultat en 3D
-
-#X,Y = np.meshgrid(x,y)
-#Z = put_BS(20*x,0.01,0.1,y,100)
-
-x=np.linspace(-3,3,100)
-y=np.linspace(-3,3,100)
-X,Y = np.meshgrid(x,y)
-Z = 1/(1+np.exp(-X-Y))
+X,Y = np.meshgrid(tab_k,tab_T)
+Z = put_BS(20*X,0.01,0.1,Y,100)
 
 fig = plt.figure()
 axes = plt.axes(projection="3d")
-axes.plot_surface(X,Y,Z,cmap="plasma")
+axes.plot_surface(X,Y,Z,cmap=cm.coolwarm, linewidth=0, antialiased=False)
 axes.set_title("Graphique du prix avec put_BS")
 ax.set_xlabel('k')
 ax.set_ylabel('T')
@@ -322,8 +322,7 @@ for i in range(100):
     bn = (1 + rn) * np.exp(-sigma * np.sqrt(T/n2[i])) - 1
     price_2[i] = pricer_2(int(n2[i]), rn, hn, bn, s, f)
 plt.plot(n2, price_2)
-plt.axhline(9.415)
+plt.axhline(put_BS(100, 0.03, 0.2, 1, 100))
 plt.xlabel("n")
 plt.ylabel("pricer 2")
 plt.show()
-
